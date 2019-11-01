@@ -99,7 +99,7 @@ Module modGlobal
                 MyDBOpen(MSCON)
                 MSCMD.Connection = MSCON
 
-                MSCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting LIKE '" & sSetting & "%' ORDER BY Setting"
+                MSCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting LIKE '%" & sSetting & "%' ORDER BY Setting"
                 MSDR = MyExecuteReader(MSCMD)
 
                 Try
@@ -125,7 +125,7 @@ Module modGlobal
                 MyDBOpen(MYCON)
                 MYCMD.Connection = MYCON
 
-                MYCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting LIKE '" & sSetting & "%' ORDER BY Setting"
+                MYCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting LIKE '%" & sSetting & "%' ORDER BY Setting"
                 MYDR = MyExecuteReader(MYCMD)
 
                 Try
