@@ -170,11 +170,6 @@ Public Class frmMain
                 Return bReturn
             End If
 
-            If WriteToIni("DATABASE-TYPE=0", "DATABASE-TYPE", sConfigFile) = False Then
-                bReturn = False
-                Return bReturn
-            End If
-
             If WriteToIni("SERVERNAME=" & My.Computer.Name, "SERVERNAME", sConfigFile) = False Then
                 bReturn = False
                 Return bReturn
@@ -244,7 +239,6 @@ Public Class frmMain
         Dim bReturn As Boolean = True
 
         Try
-            thisConfig.DatabaseType = GetInfoFromIni("DATABASE-TYPE", sConfigFile, False)
             thisConfig.ServerName = GetInfoFromIni("SERVERNAME", sConfigFile, False)
             thisConfig.DPosIniLoc = GetInfoFromIni("DPOSINILOC", sConfigFile, False)
             thisConfig.MSUser = GetInfoFromIni("SQLUSERNAME", sConfigFile, False)
@@ -253,6 +247,13 @@ Public Class frmMain
             thisConfig.MYUser = GetInfoFromIni("MYSQLUSERNAME", sConfigFile, False)
             thisConfig.MYPass = DecryptString(GetInfoFromIni("MYSQLPASSWORD", sConfigFile, False))
             thisConfig.MYCSVPass = DecryptString(GetInfoFromIni("CSVPASSWORD", sConfigFile, False))
+
+            If File.Exists(thisConfig.DPosIniLoc) Then
+                thisConfig.DatabaseType = GetInfoFromIni("DATABASE-TYPE", thisConfig.DPosIniLoc, False)
+            Else
+                MessageBox.Show(Me, "Cannot find DPos.ini on " & thisConfig.DPosIniLoc & vbCrLf & "The App Tool is going to look up to MSSERVER", "DPos.ini does not exist")
+                thisConfig.DatabaseType = 0
+            End If
         Catch ex As Exception
             sErrMsg = ex.Message.ToString
             Return bReturn
@@ -286,21 +287,21 @@ Public Class frmMain
         Try
             thisInfo.DPosVersion = GetDPosVersion()
 
-            'check if Dpos.ini Exist
-            If myFileExist(thisConfig.DPosIniLoc) Then
-                Dim sThisDBType As String = GetInfoFromIni("DATABASE-TYPE", thisConfig.DPosIniLoc, False)
-                If sThisDBType = "" Then
-                    thisInfo.DPosIniDBType = "0"
-                    bReturn = False
-                    sErrMsg = "DATABASE-TYPE property was not found on Dpos.ini. Please check file or Dpos.ini location from Configurations"
-                Else
-                    thisInfo.DPosIniDBType = sThisDBType
-                End If
-            Else
-                thisInfo.DPosIniDBType = "0"
-                bReturn = False
-                sErrMsg = "DPos.ini does not exist check Dpos.ini location from Configurations"
-            End If
+            ''check if Dpos.ini Exist
+            'If myFileExist(thisConfig.DPosIniLoc) Then
+            '    Dim sThisDBType As String = GetInfoFromIni("DATABASE-TYPE", thisConfig.DPosIniLoc, False)
+            '    If sThisDBType = "" Then
+            '        thisInfo.DPosIniDBType = "0"
+            '        bReturn = False
+            '        sErrMsg = "DATABASE-TYPE property was not found on Dpos.ini. Please check file or Dpos.ini location from Configurations"
+            '    Else
+            '        thisInfo.DPosIniDBType = sThisDBType
+            '    End If
+            'Else
+            '    thisInfo.DPosIniDBType = "0"
+            '    bReturn = False
+            '    sErrMsg = "DPos.ini does not exist check Dpos.ini location from Configurations"
+            'End If
 
             thisInfo.DBVersion = GetSetting("Version")
             thisInfo.DocketHeading1 = GetSetting("DocketHeading1")
@@ -324,7 +325,7 @@ Public Class frmMain
             Me.txtEnabledCloud.Text = thisInfo.EnableCloud
             Me.txtClient.Text = thisInfo.ClientID
             Me.txtCloudUrl.Text = thisInfo.CloudURL
-            Me.tgInfoDPosDBType.Checked = myCBool(thisInfo.DPosIniDBType)
+            'Me.tgInfoDPosDBType.Checked = myCBool(thisInfo.DPosIniDBType)
         Catch ex As Exception
             sErrMsg = ex.Message.ToString
             bReturn = False
@@ -354,39 +355,7 @@ Public Class frmMain
 #End Region
 
 #Region "Information"
-    Private Sub btnInfoEdit_Click(sender As Object, e As EventArgs) Handles btnInfoEdit.Click
-        If Me.btnInfoEdit.Text = "Edit" Then
-            SwitchInfoUI(True, "Save", True, myCInt(thisInfo.DPosIniDBType), Me.DotNetBarTabcontrol1.SelectedIndex, False)
-        Else
-            Try
-                If myFileExist(thisConfig.DPosIniLoc) Then
-                    If thisInfo.DPosIniDBType <> myCInt(Me.tgInfoDPosDBType.Checked) Then WriteToIni("DATABASE-TYPE=" & myBooltoInt(myCStr(Me.tgInfoDPosDBType.Checked)), "DATABASE-TYPE", thisConfig.DPosIniLoc)
-                Else
-                    MessageBox.Show(Me, "DPos.ini not found or your installed DPos does not have DPos.ini", "Please check Configurations")
-                End If
 
-                Dim sError As String = ""
-                myAppIni(sError, False)
-
-                SwitchInfoUI(False, "Edit", False, myCInt(thisInfo.DPosIniDBType), Me.DotNetBarTabcontrol1.SelectedIndex, True)
-            Catch ex As Exception
-
-            End Try
-        End If
-    End Sub
-
-    Private Sub btnInfoCancel_Click(sender As Object, e As EventArgs) Handles btnInfoCancel.Click
-        SwitchInfoUI(False, "Edit", False, myCInt(thisInfo.DPosIniDBType), Me.DotNetBarTabcontrol1.SelectedIndex, True)
-    End Sub
-
-    Private Sub SwitchInfoUI(ByVal bBtnIOCancelV As Boolean, ByVal sBtnIOEditText As String, ByVal bBtnIODPosDB As Boolean, ByVal iDPosIniDBType As Integer, ByVal iTabIndex As Integer, ByVal bbChangeTab As Boolean)
-        Me.btnInfoCancel.Visible = bBtnIOCancelV
-        Me.btnInfoEdit.Text = sBtnIOEditText
-        Me.tgInfoDPosDBType.Enabled = bBtnIODPosDB
-        Me.tgInfoDPosDBType.CheckState = iDPosIniDBType
-        sThisTabIndex = iTabIndex
-        bChangeTab = bbChangeTab
-    End Sub
 #End Region
 
 #Region "Configurations"
@@ -406,7 +375,6 @@ Public Class frmMain
         End If
 
         Try
-            If thisConfig.DatabaseType <> myCInt(Me.tgOptDBType.Checked) Then WriteToIni("DATABASE-TYPE=" & myBooltoInt(myCStr(Me.tgOptDBType.Checked)), "DATABASE-TYPE", sConfigFile)
             If thisConfig.ServerName <> Me.txtOptServerName.Text Then WriteToIni("SERVERNAME=" & Me.txtOptServerName.Text, "SERVERNAME", sConfigFile)
             If thisConfig.DPosIniLoc <> Me.txtOptDPosIni.Text Then WriteToIni("DPOSINILOC=" & Me.txtOptDPosIni.Text, "DPOSINILOC", sConfigFile)
             If thisConfig.MSUser <> Me.txtOptMSUser.Text Then WriteToIni("SQLUSERNAME=" & Me.txtOptMSUser.Text, "SQLUSERNAME", sConfigFile)
@@ -415,6 +383,9 @@ Public Class frmMain
             If thisConfig.MYUser <> Me.txtOptMYUser.Text Then WriteToIni("MYSQLUSERNAME=" & Me.txtOptMYUser.Text, "MYSQLUSERNAME", sConfigFile)
             If thisConfig.MYPass <> Me.txtOptMYPass.Text Then WriteToIni("MYSQLPASSWORD=" & EncryptString(Me.txtOptMYPass.Text), "MYSQLPASSWORD", sConfigFile)
             If thisConfig.MYCSVPass <> Me.txtOptMYCSVPass.Text Then WriteToIni("CSVPASSWORD=" & EncryptString(Me.txtOptMYCSVPass.Text), "CSVPASSWORD", sConfigFile)
+            If thisConfig.DatabaseType <> myCInt(Me.tgOptDBType.Checked) Then WriteToIni("DATABASE-TYPE=" & myBooltoInt(myCStr(Me.tgOptDBType.Checked)), "DATABASE-TYPE", Me.txtOptDPosIni.Text)
+
+            MessageBox.Show("Saved!!")
         Catch ex As Exception
 
         End Try
@@ -1521,18 +1492,20 @@ Public Class frmMain
         SwitchSettingFields(True)
     End Sub
 
-
-
     Private Sub btnSettingsCancel_Click(sender As Object, e As EventArgs) Handles btnSettingsCancel.Click
         SwitchSettingFields(False)
     End Sub
 
+    Private Sub cbSettingMatchOpt_CheckedChanged(sender As Object, e As EventArgs) Handles cbSettingMatchOpt.CheckedChanged
+        PopulateSettingFields(Me.cbSettingMatchOpt.Checked)
+    End Sub
+
     Private Sub cmbSettingSetting_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSettingSetting.SelectedIndexChanged
-        PopulateSettingFields()
+        PopulateSettingFields(Me.cbSettingMatchOpt.Checked)
     End Sub
 
     Private Sub cmbSettingSetting_TextChanged(sender As Object, e As EventArgs) Handles cmbSettingSetting.TextChanged
-        PopulateSettingFields()
+        PopulateSettingFields(Me.cbSettingMatchOpt.Checked)
     End Sub
 
     Private Sub pbCopy_Click(sender As Object, e As EventArgs) Handles pbCopy.Click
@@ -1612,14 +1585,14 @@ Public Class frmMain
         SwitchSettingFields(False)
     End Sub
 
-    Private Function PopulateSettingFields() As Boolean
+    Private Function PopulateSettingFields(ByVal bLike As Boolean) As Boolean
         Dim bReturn As Boolean = True
 
         Try
             Dim sSetting As String = ""
             ClearSettingFields()
             If Me.cmbSettingSetting.Text <> "" Then
-                sSetting = GetSettingFromDatabase(Me.cmbSettingSetting.Text)
+                sSetting = GetSettingFromDatabase(Me.cmbSettingSetting.Text, bLike)
                 'myDRString(MSDR, "Setting")
                 'myDRString(MSDR, "DefaultValue")
                 'myDRString(MSDR, "Comments")
@@ -1689,5 +1662,4 @@ Public Class frmMain
         Me.DotNetBarTabcontrol1.SelectTab(sThisTabIndex)
         Me.btnLogsBack.Visible = False
     End Sub
-
 End Class

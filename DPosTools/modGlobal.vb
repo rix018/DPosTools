@@ -86,7 +86,7 @@ Module modGlobal
         Return bOK
     End Function
 
-    Public Function GetSettingFromDatabase(ByVal sSetting As String) As String
+    Public Function GetSettingFromDatabase(ByVal sSetting As String, ByVal bLike As Boolean) As String
         Dim sReturn As String = ""
 
         Try
@@ -99,7 +99,12 @@ Module modGlobal
                 MyDBOpen(MSCON)
                 MSCMD.Connection = MSCON
 
-                MSCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting LIKE '%" & sSetting & "%' ORDER BY Setting"
+                If bLike Then
+                    MSCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting LIKE '%" & sSetting & "%' ORDER BY Setting"
+                Else
+                    MSCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting='" & sSetting & "' ORDER BY Setting"
+                End If
+
                 MSDR = MyExecuteReader(MSCMD)
 
                 Try
@@ -125,7 +130,12 @@ Module modGlobal
                 MyDBOpen(MYCON)
                 MYCMD.Connection = MYCON
 
-                MYCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting LIKE '%" & sSetting & "%' ORDER BY Setting"
+                If bLike Then
+                    MYCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting LIKE '%" & sSetting & "%' ORDER BY Setting"
+                Else
+                    MYCMD.CommandText = "SELECT * FROM tblSettings WHERE Setting='" & sSetting & "' ORDER BY Setting"
+                End If
+
                 MYDR = MyExecuteReader(MYCMD)
 
                 Try

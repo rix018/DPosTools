@@ -29,12 +29,6 @@ Partial Class frmMain
         Me.thisFileBrowser = New System.Windows.Forms.FolderBrowserDialog()
         Me.DotNetBarTabcontrol1 = New DPosTools.DotNetBarTabcontrol()
         Me.tblMain = New System.Windows.Forms.TabPage()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.tgInfoDPosDBType = New MetroFramework.Controls.MetroToggle()
-        Me.btnInfoCancel = New System.Windows.Forms.Button()
-        Me.btnInfoEdit = New System.Windows.Forms.Button()
-        Me.Label18 = New System.Windows.Forms.Label()
         Me.txtCloudUrl = New System.Windows.Forms.Label()
         Me.txtClient = New System.Windows.Forms.Label()
         Me.txtEnabledCloud = New System.Windows.Forms.Label()
@@ -80,6 +74,7 @@ Partial Class frmMain
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tbpDPosSettings = New System.Windows.Forms.TabPage()
+        Me.cbSettingMatchOpt = New System.Windows.Forms.CheckBox()
         Me.lblSettingSetting = New System.Windows.Forms.Label()
         Me.pbCopy = New System.Windows.Forms.PictureBox()
         Me.btnSettingsCancel = New System.Windows.Forms.Button()
@@ -170,12 +165,6 @@ Partial Class frmMain
         'tblMain
         '
         Me.tblMain.BackColor = System.Drawing.Color.White
-        Me.tblMain.Controls.Add(Me.Label21)
-        Me.tblMain.Controls.Add(Me.Label24)
-        Me.tblMain.Controls.Add(Me.tgInfoDPosDBType)
-        Me.tblMain.Controls.Add(Me.btnInfoCancel)
-        Me.tblMain.Controls.Add(Me.btnInfoEdit)
-        Me.tblMain.Controls.Add(Me.Label18)
         Me.tblMain.Controls.Add(Me.txtCloudUrl)
         Me.tblMain.Controls.Add(Me.txtClient)
         Me.tblMain.Controls.Add(Me.txtEnabledCloud)
@@ -195,85 +184,6 @@ Partial Class frmMain
         Me.tblMain.Size = New System.Drawing.Size(489, 365)
         Me.tblMain.TabIndex = 0
         Me.tblMain.Text = "Main"
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.BackColor = System.Drawing.Color.Transparent
-        Me.Label21.Font = New System.Drawing.Font("Roboto Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(165, 292)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(50, 15)
-        Me.Label21.TabIndex = 132
-        Me.Label21.Text = "MYSQL"
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.BackColor = System.Drawing.Color.Transparent
-        Me.Label24.Font = New System.Drawing.Font("Roboto Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(31, 292)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(72, 15)
-        Me.Label24.TabIndex = 131
-        Me.Label24.Text = "MSSERVER"
-        '
-        'tgInfoDPosDBType
-        '
-        Me.tgInfoDPosDBType.AutoSize = True
-        Me.tgInfoDPosDBType.BackColor = System.Drawing.Color.DodgerBlue
-        Me.tgInfoDPosDBType.Checked = True
-        Me.tgInfoDPosDBType.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.tgInfoDPosDBType.DisplayStatus = False
-        Me.tgInfoDPosDBType.Enabled = False
-        Me.tgInfoDPosDBType.Location = New System.Drawing.Point(109, 292)
-        Me.tgInfoDPosDBType.Name = "tgInfoDPosDBType"
-        Me.tgInfoDPosDBType.Size = New System.Drawing.Size(50, 17)
-        Me.tgInfoDPosDBType.TabIndex = 130
-        Me.tgInfoDPosDBType.Text = "On"
-        Me.tgInfoDPosDBType.UseVisualStyleBackColor = False
-        '
-        'btnInfoCancel
-        '
-        Me.btnInfoCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.btnInfoCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.btnInfoCancel.FlatAppearance.BorderSize = 0
-        Me.btnInfoCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnInfoCancel.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInfoCancel.ForeColor = System.Drawing.Color.White
-        Me.btnInfoCancel.Location = New System.Drawing.Point(286, 288)
-        Me.btnInfoCancel.Name = "btnInfoCancel"
-        Me.btnInfoCancel.Size = New System.Drawing.Size(59, 23)
-        Me.btnInfoCancel.TabIndex = 129
-        Me.btnInfoCancel.Text = "Cancel"
-        Me.btnInfoCancel.UseVisualStyleBackColor = False
-        Me.btnInfoCancel.Visible = False
-        '
-        'btnInfoEdit
-        '
-        Me.btnInfoEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.btnInfoEdit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.btnInfoEdit.FlatAppearance.BorderSize = 0
-        Me.btnInfoEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnInfoEdit.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInfoEdit.ForeColor = System.Drawing.Color.White
-        Me.btnInfoEdit.Location = New System.Drawing.Point(221, 288)
-        Me.btnInfoEdit.Name = "btnInfoEdit"
-        Me.btnInfoEdit.Size = New System.Drawing.Size(59, 23)
-        Me.btnInfoEdit.TabIndex = 128
-        Me.btnInfoEdit.Text = "Edit"
-        Me.btnInfoEdit.UseVisualStyleBackColor = False
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.BackColor = System.Drawing.Color.Transparent
-        Me.Label18.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(26, 262)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(131, 15)
-        Me.Label18.TabIndex = 127
-        Me.Label18.Text = "DPos Database-Type:"
         '
         'txtCloudUrl
         '
@@ -841,6 +751,7 @@ Partial Class frmMain
         'tbpDPosSettings
         '
         Me.tbpDPosSettings.BackColor = System.Drawing.Color.White
+        Me.tbpDPosSettings.Controls.Add(Me.cbSettingMatchOpt)
         Me.tbpDPosSettings.Controls.Add(Me.lblSettingSetting)
         Me.tbpDPosSettings.Controls.Add(Me.pbCopy)
         Me.tbpDPosSettings.Controls.Add(Me.btnSettingsCancel)
@@ -863,6 +774,18 @@ Partial Class frmMain
         Me.tbpDPosSettings.Size = New System.Drawing.Size(489, 365)
         Me.tbpDPosSettings.TabIndex = 4
         Me.tbpDPosSettings.Text = "DPos Settings"
+        '
+        'cbSettingMatchOpt
+        '
+        Me.cbSettingMatchOpt.AutoSize = True
+        Me.cbSettingMatchOpt.Checked = True
+        Me.cbSettingMatchOpt.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbSettingMatchOpt.Location = New System.Drawing.Point(349, 72)
+        Me.cbSettingMatchOpt.Name = "cbSettingMatchOpt"
+        Me.cbSettingMatchOpt.Size = New System.Drawing.Size(88, 17)
+        Me.cbSettingMatchOpt.TabIndex = 108
+        Me.cbSettingMatchOpt.Text = "Any Matches"
+        Me.cbSettingMatchOpt.UseVisualStyleBackColor = True
         '
         'lblSettingSetting
         '
@@ -1415,12 +1338,6 @@ Partial Class frmMain
     Friend WithEvents tbpLogs As TabPage
     Friend WithEvents tbpDPosSettings As TabPage
     Friend WithEvents tbpConfigurations As TabPage
-    Friend WithEvents Label21 As Label
-    Friend WithEvents Label24 As Label
-    Friend WithEvents tgInfoDPosDBType As MetroFramework.Controls.MetroToggle
-    Friend WithEvents btnInfoCancel As Button
-    Friend WithEvents btnInfoEdit As Button
-    Friend WithEvents Label18 As Label
     Friend WithEvents txtCloudUrl As Label
     Friend WithEvents txtClient As Label
     Friend WithEvents txtEnabledCloud As Label
@@ -1508,4 +1425,5 @@ Partial Class frmMain
     Friend WithEvents btnSettingsEdit As Button
     Friend WithEvents pbCopy As PictureBox
     Friend WithEvents lblSettingSetting As Label
+    Friend WithEvents cbSettingMatchOpt As CheckBox
 End Class
