@@ -7,12 +7,14 @@ Module modGlobal
 
     Public sConfigFile As String
     Public sCSVRestoreLogsFile As String
+    Public sCloudURLPresets As String
     Public dirMSSERVER As String = Application.StartupPath & "\Database\MSSERVER"
     Public dirMYSQL As String = Application.StartupPath & "\Database\MYSQL"
 
     Public thisConfig As New clsConfig
     Public thisInfo As New clsInfo
     Public arSettings As New ArrayList
+    Public arCloudPresets As New ArrayList
 
     Public bChangeTab As Boolean
     Public sThisTabIndex As Integer
@@ -398,6 +400,37 @@ Module modGlobal
             sString = 0
         End Try
     End Sub
+
+    Public Function GetDSoftPassword() As String
+        Dim i As Integer
+        Dim s As String
+        Dim iOut As Integer
+        Dim sOut As String = ""
+
+        s = Date.Today.Day.ToString.PadLeft(2, "0") & Date.Today.Month.ToString.PadLeft(2, "0") & Date.Today.Year.ToString.Substring(2, 2)
+        For i = 0 To 3
+            iOut += myCInt(s.Substring(i, 1))
+        Next
+        sOut = myCStr(iOut)
+        sOut = sOut.PadLeft(3, CChar("0"))
+
+        Return sOut
+    End Function
+
+    Public Function GetChainPassword() As String
+        Dim i As Integer
+        Dim s As String
+        Dim iOut As Integer
+        Dim sOut As String = ""
+
+        s = Date.Today.Day.ToString.PadLeft(2, "0") & Date.Today.Month.ToString.PadLeft(2, "0") & Date.Today.Year.ToString.Substring(2, 2)
+        For i = 0 To 2
+            iOut = myCInt(s.Substring(i, 1)) + myCInt(s.Substring(5 - i, 1))
+            sOut &= myCStr(iOut)
+        Next
+
+        Return sOut
+    End Function
 
     Public Function myBooltoDBType(ByVal i As Object) As String
         Dim sOut As String

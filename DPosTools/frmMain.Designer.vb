@@ -120,6 +120,32 @@ Partial Class frmMain
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.tbSettings = New System.Windows.Forms.TabControl()
+        Me.tbSetGlobal = New System.Windows.Forms.TabPage()
+        Me.tbSetCloud = New System.Windows.Forms.TabPage()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.txtCloudClientID = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.txtCloudCloudURL = New System.Windows.Forms.TextBox()
+        Me.txtCloudAutoActivation = New System.Windows.Forms.TextBox()
+        Me.txtCloudSSHCreds = New System.Windows.Forms.TextBox()
+        Me.txtCloudResyncReturn = New System.Windows.Forms.TextBox()
+        Me.btnCloudSave = New System.Windows.Forms.Button()
+        Me.tgCloudEnable = New MetroFramework.Controls.MetroToggle()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.btnCloudCancel = New System.Windows.Forms.Button()
+        Me.cmbCloudPreset = New System.Windows.Forms.ComboBox()
+        Me.btnCloudPresetUSE = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.lblPWDsoft = New System.Windows.Forms.Label()
+        Me.lblPWCrust = New System.Windows.Forms.Label()
         Me.DotNetBarTabcontrol1.SuspendLayout()
         Me.tblMain.SuspendLayout()
         Me.tbpBackup.SuspendLayout()
@@ -134,6 +160,11 @@ Partial Class frmMain
         Me.tbcCreds.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.tbSettings.SuspendLayout()
+        Me.tbSetGlobal.SuspendLayout()
+        Me.tbSetCloud.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'thisOpenFileDia
@@ -165,6 +196,7 @@ Partial Class frmMain
         'tblMain
         '
         Me.tblMain.BackColor = System.Drawing.Color.White
+        Me.tblMain.Controls.Add(Me.GroupBox4)
         Me.tblMain.Controls.Add(Me.txtCloudUrl)
         Me.tblMain.Controls.Add(Me.txtClient)
         Me.tblMain.Controls.Add(Me.txtEnabledCloud)
@@ -751,22 +783,7 @@ Partial Class frmMain
         'tbpDPosSettings
         '
         Me.tbpDPosSettings.BackColor = System.Drawing.Color.White
-        Me.tbpDPosSettings.Controls.Add(Me.cbSettingMatchOpt)
-        Me.tbpDPosSettings.Controls.Add(Me.lblSettingSetting)
-        Me.tbpDPosSettings.Controls.Add(Me.pbCopy)
-        Me.tbpDPosSettings.Controls.Add(Me.btnSettingsCancel)
-        Me.tbpDPosSettings.Controls.Add(Me.btnSettingsSave)
-        Me.tbpDPosSettings.Controls.Add(Me.btnSettingsEdit)
-        Me.tbpDPosSettings.Controls.Add(Me.cmbSettingSetting)
-        Me.tbpDPosSettings.Controls.Add(Me.txtSettingComment)
-        Me.tbpDPosSettings.Controls.Add(Me.txtSettingCategory)
-        Me.tbpDPosSettings.Controls.Add(Me.txtSettingDefaultValue)
-        Me.tbpDPosSettings.Controls.Add(Me.txtSettingSettingValue)
-        Me.tbpDPosSettings.Controls.Add(Me.Label30)
-        Me.tbpDPosSettings.Controls.Add(Me.Label29)
-        Me.tbpDPosSettings.Controls.Add(Me.Label28)
-        Me.tbpDPosSettings.Controls.Add(Me.Label27)
-        Me.tbpDPosSettings.Controls.Add(Me.Label26)
+        Me.tbpDPosSettings.Controls.Add(Me.tbSettings)
         Me.tbpDPosSettings.Controls.Add(Me.Label25)
         Me.tbpDPosSettings.Location = New System.Drawing.Point(140, 4)
         Me.tbpDPosSettings.Name = "tbpDPosSettings"
@@ -780,9 +797,9 @@ Partial Class frmMain
         Me.cbSettingMatchOpt.AutoSize = True
         Me.cbSettingMatchOpt.Checked = True
         Me.cbSettingMatchOpt.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbSettingMatchOpt.Location = New System.Drawing.Point(349, 72)
+        Me.cbSettingMatchOpt.Location = New System.Drawing.Point(342, 15)
         Me.cbSettingMatchOpt.Name = "cbSettingMatchOpt"
-        Me.cbSettingMatchOpt.Size = New System.Drawing.Size(88, 17)
+        Me.cbSettingMatchOpt.Size = New System.Drawing.Size(102, 19)
         Me.cbSettingMatchOpt.TabIndex = 108
         Me.cbSettingMatchOpt.Text = "Any Matches"
         Me.cbSettingMatchOpt.UseVisualStyleBackColor = True
@@ -792,7 +809,7 @@ Partial Class frmMain
         Me.lblSettingSetting.AutoSize = True
         Me.lblSettingSetting.BackColor = System.Drawing.Color.Transparent
         Me.lblSettingSetting.Font = New System.Drawing.Font("Roboto Light", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSettingSetting.Location = New System.Drawing.Point(136, 98)
+        Me.lblSettingSetting.Location = New System.Drawing.Point(129, 41)
         Me.lblSettingSetting.Name = "lblSettingSetting"
         Me.lblSettingSetting.Size = New System.Drawing.Size(47, 15)
         Me.lblSettingSetting.TabIndex = 107
@@ -802,7 +819,7 @@ Partial Class frmMain
         '
         Me.pbCopy.BackgroundImage = Global.DPosTools.My.Resources.Resources.ToolCopy
         Me.pbCopy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbCopy.Location = New System.Drawing.Point(456, 154)
+        Me.pbCopy.Location = New System.Drawing.Point(434, 98)
         Me.pbCopy.Name = "pbCopy"
         Me.pbCopy.Size = New System.Drawing.Size(20, 20)
         Me.pbCopy.TabIndex = 106
@@ -818,7 +835,7 @@ Partial Class frmMain
         Me.btnSettingsCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSettingsCancel.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSettingsCancel.ForeColor = System.Drawing.Color.White
-        Me.btnSettingsCancel.Location = New System.Drawing.Point(366, 326)
+        Me.btnSettingsCancel.Location = New System.Drawing.Point(341, 244)
         Me.btnSettingsCancel.Name = "btnSettingsCancel"
         Me.btnSettingsCancel.Size = New System.Drawing.Size(110, 32)
         Me.btnSettingsCancel.TabIndex = 105
@@ -834,7 +851,7 @@ Partial Class frmMain
         Me.btnSettingsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSettingsSave.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSettingsSave.ForeColor = System.Drawing.Color.White
-        Me.btnSettingsSave.Location = New System.Drawing.Point(250, 326)
+        Me.btnSettingsSave.Location = New System.Drawing.Point(225, 244)
         Me.btnSettingsSave.Name = "btnSettingsSave"
         Me.btnSettingsSave.Size = New System.Drawing.Size(110, 32)
         Me.btnSettingsSave.TabIndex = 104
@@ -849,7 +866,7 @@ Partial Class frmMain
         Me.btnSettingsEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSettingsEdit.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSettingsEdit.ForeColor = System.Drawing.Color.White
-        Me.btnSettingsEdit.Location = New System.Drawing.Point(134, 326)
+        Me.btnSettingsEdit.Location = New System.Drawing.Point(109, 244)
         Me.btnSettingsEdit.Name = "btnSettingsEdit"
         Me.btnSettingsEdit.Size = New System.Drawing.Size(110, 32)
         Me.btnSettingsEdit.TabIndex = 103
@@ -862,7 +879,7 @@ Partial Class frmMain
         Me.cmbSettingSetting.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbSettingSetting.Font = New System.Drawing.Font("Roboto", 9.75!)
         Me.cmbSettingSetting.FormattingEnabled = True
-        Me.cmbSettingSetting.Location = New System.Drawing.Point(136, 69)
+        Me.cmbSettingSetting.Location = New System.Drawing.Point(129, 12)
         Me.cmbSettingSetting.Name = "cmbSettingSetting"
         Me.cmbSettingSetting.Size = New System.Drawing.Size(207, 23)
         Me.cmbSettingSetting.TabIndex = 102
@@ -871,37 +888,37 @@ Partial Class frmMain
         '
         Me.txtSettingComment.Enabled = False
         Me.txtSettingComment.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSettingComment.Location = New System.Drawing.Point(136, 216)
+        Me.txtSettingComment.Location = New System.Drawing.Point(129, 159)
         Me.txtSettingComment.Multiline = True
         Me.txtSettingComment.Name = "txtSettingComment"
-        Me.txtSettingComment.Size = New System.Drawing.Size(317, 97)
+        Me.txtSettingComment.Size = New System.Drawing.Size(299, 77)
         Me.txtSettingComment.TabIndex = 101
         '
         'txtSettingCategory
         '
         Me.txtSettingCategory.Enabled = False
         Me.txtSettingCategory.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSettingCategory.Location = New System.Drawing.Point(136, 184)
+        Me.txtSettingCategory.Location = New System.Drawing.Point(129, 127)
         Me.txtSettingCategory.Name = "txtSettingCategory"
-        Me.txtSettingCategory.Size = New System.Drawing.Size(317, 23)
+        Me.txtSettingCategory.Size = New System.Drawing.Size(299, 23)
         Me.txtSettingCategory.TabIndex = 100
         '
         'txtSettingDefaultValue
         '
         Me.txtSettingDefaultValue.Enabled = False
         Me.txtSettingDefaultValue.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSettingDefaultValue.Location = New System.Drawing.Point(136, 152)
+        Me.txtSettingDefaultValue.Location = New System.Drawing.Point(129, 95)
         Me.txtSettingDefaultValue.Name = "txtSettingDefaultValue"
-        Me.txtSettingDefaultValue.Size = New System.Drawing.Size(317, 23)
+        Me.txtSettingDefaultValue.Size = New System.Drawing.Size(299, 23)
         Me.txtSettingDefaultValue.TabIndex = 99
         '
         'txtSettingSettingValue
         '
         Me.txtSettingSettingValue.Enabled = False
         Me.txtSettingSettingValue.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSettingSettingValue.Location = New System.Drawing.Point(136, 120)
+        Me.txtSettingSettingValue.Location = New System.Drawing.Point(129, 63)
         Me.txtSettingSettingValue.Name = "txtSettingSettingValue"
-        Me.txtSettingSettingValue.Size = New System.Drawing.Size(317, 23)
+        Me.txtSettingSettingValue.Size = New System.Drawing.Size(299, 23)
         Me.txtSettingSettingValue.TabIndex = 98
         '
         'Label30
@@ -909,7 +926,7 @@ Partial Class frmMain
         Me.Label30.AutoSize = True
         Me.Label30.BackColor = System.Drawing.Color.Transparent
         Me.Label30.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(22, 219)
+        Me.Label30.Location = New System.Drawing.Point(15, 162)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(67, 15)
         Me.Label30.TabIndex = 97
@@ -920,7 +937,7 @@ Partial Class frmMain
         Me.Label29.AutoSize = True
         Me.Label29.BackColor = System.Drawing.Color.Transparent
         Me.Label29.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.Location = New System.Drawing.Point(22, 189)
+        Me.Label29.Location = New System.Drawing.Point(15, 132)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(64, 15)
         Me.Label29.TabIndex = 96
@@ -931,7 +948,7 @@ Partial Class frmMain
         Me.Label28.AutoSize = True
         Me.Label28.BackColor = System.Drawing.Color.Transparent
         Me.Label28.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(22, 157)
+        Me.Label28.Location = New System.Drawing.Point(15, 100)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(88, 15)
         Me.Label28.TabIndex = 95
@@ -942,7 +959,7 @@ Partial Class frmMain
         Me.Label27.AutoSize = True
         Me.Label27.BackColor = System.Drawing.Color.Transparent
         Me.Label27.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(22, 125)
+        Me.Label27.Location = New System.Drawing.Point(15, 68)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(87, 15)
         Me.Label27.TabIndex = 94
@@ -953,7 +970,7 @@ Partial Class frmMain
         Me.Label26.AutoSize = True
         Me.Label26.BackColor = System.Drawing.Color.Transparent
         Me.Label26.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(22, 74)
+        Me.Label26.Location = New System.Drawing.Point(15, 17)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(54, 15)
         Me.Label26.TabIndex = 93
@@ -1295,6 +1312,325 @@ Partial Class frmMain
         Me.Label12.TabIndex = 103
         Me.Label12.Text = "Configurations"
         '
+        'tbSettings
+        '
+        Me.tbSettings.Controls.Add(Me.tbSetGlobal)
+        Me.tbSettings.Controls.Add(Me.tbSetCloud)
+        Me.tbSettings.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.tbSettings.Location = New System.Drawing.Point(6, 47)
+        Me.tbSettings.Name = "tbSettings"
+        Me.tbSettings.SelectedIndex = 0
+        Me.tbSettings.Size = New System.Drawing.Size(477, 312)
+        Me.tbSettings.TabIndex = 109
+        '
+        'tbSetGlobal
+        '
+        Me.tbSetGlobal.Controls.Add(Me.btnSettingsCancel)
+        Me.tbSetGlobal.Controls.Add(Me.cbSettingMatchOpt)
+        Me.tbSetGlobal.Controls.Add(Me.Label26)
+        Me.tbSetGlobal.Controls.Add(Me.lblSettingSetting)
+        Me.tbSetGlobal.Controls.Add(Me.Label27)
+        Me.tbSetGlobal.Controls.Add(Me.pbCopy)
+        Me.tbSetGlobal.Controls.Add(Me.Label28)
+        Me.tbSetGlobal.Controls.Add(Me.Label29)
+        Me.tbSetGlobal.Controls.Add(Me.btnSettingsSave)
+        Me.tbSetGlobal.Controls.Add(Me.Label30)
+        Me.tbSetGlobal.Controls.Add(Me.btnSettingsEdit)
+        Me.tbSetGlobal.Controls.Add(Me.txtSettingSettingValue)
+        Me.tbSetGlobal.Controls.Add(Me.cmbSettingSetting)
+        Me.tbSetGlobal.Controls.Add(Me.txtSettingDefaultValue)
+        Me.tbSetGlobal.Controls.Add(Me.txtSettingComment)
+        Me.tbSetGlobal.Controls.Add(Me.txtSettingCategory)
+        Me.tbSetGlobal.Location = New System.Drawing.Point(4, 24)
+        Me.tbSetGlobal.Name = "tbSetGlobal"
+        Me.tbSetGlobal.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbSetGlobal.Size = New System.Drawing.Size(469, 284)
+        Me.tbSetGlobal.TabIndex = 0
+        Me.tbSetGlobal.Text = "Global"
+        Me.tbSetGlobal.UseVisualStyleBackColor = True
+        '
+        'tbSetCloud
+        '
+        Me.tbSetCloud.Controls.Add(Me.btnCloudCancel)
+        Me.tbSetCloud.Controls.Add(Me.tgCloudEnable)
+        Me.tbSetCloud.Controls.Add(Me.btnCloudSave)
+        Me.tbSetCloud.Controls.Add(Me.GroupBox3)
+        Me.tbSetCloud.Controls.Add(Me.txtCloudClientID)
+        Me.tbSetCloud.Controls.Add(Me.Label21)
+        Me.tbSetCloud.Controls.Add(Me.Label18)
+        Me.tbSetCloud.Location = New System.Drawing.Point(4, 24)
+        Me.tbSetCloud.Name = "tbSetCloud"
+        Me.tbSetCloud.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbSetCloud.Size = New System.Drawing.Size(469, 284)
+        Me.tbSetCloud.TabIndex = 1
+        Me.tbSetCloud.Text = "Cloud Setup"
+        Me.tbSetCloud.UseVisualStyleBackColor = True
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.BackColor = System.Drawing.Color.Transparent
+        Me.Label18.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(15, 16)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(85, 15)
+        Me.Label18.TabIndex = 94
+        Me.Label18.Text = "Enable Cloud:"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.BackColor = System.Drawing.Color.Transparent
+        Me.Label21.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(15, 48)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(59, 15)
+        Me.Label21.TabIndex = 104
+        Me.Label21.Text = "Client ID:"
+        '
+        'txtCloudClientID
+        '
+        Me.txtCloudClientID.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCloudClientID.Location = New System.Drawing.Point(116, 42)
+        Me.txtCloudClientID.Name = "txtCloudClientID"
+        Me.txtCloudClientID.Size = New System.Drawing.Size(98, 23)
+        Me.txtCloudClientID.TabIndex = 105
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.BackColor = System.Drawing.Color.Transparent
+        Me.Label24.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(14, 48)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(44, 15)
+        Me.Label24.TabIndex = 106
+        Me.Label24.Text = "Cloud:"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.BackColor = System.Drawing.Color.Transparent
+        Me.Label31.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.Location = New System.Drawing.Point(14, 77)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(99, 15)
+        Me.Label31.TabIndex = 107
+        Me.Label31.Text = "Auto Activation:"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.btnCloudPresetUSE)
+        Me.GroupBox3.Controls.Add(Me.cmbCloudPreset)
+        Me.GroupBox3.Controls.Add(Me.Label34)
+        Me.GroupBox3.Controls.Add(Me.txtCloudResyncReturn)
+        Me.GroupBox3.Controls.Add(Me.txtCloudSSHCreds)
+        Me.GroupBox3.Controls.Add(Me.txtCloudAutoActivation)
+        Me.GroupBox3.Controls.Add(Me.txtCloudCloudURL)
+        Me.GroupBox3.Controls.Add(Me.Label33)
+        Me.GroupBox3.Controls.Add(Me.Label32)
+        Me.GroupBox3.Controls.Add(Me.Label24)
+        Me.GroupBox3.Controls.Add(Me.Label31)
+        Me.GroupBox3.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox3.Location = New System.Drawing.Point(9, 74)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(454, 163)
+        Me.GroupBox3.TabIndex = 108
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "URL"
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.BackColor = System.Drawing.Color.Transparent
+        Me.Label32.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label32.Location = New System.Drawing.Point(14, 105)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(105, 15)
+        Me.Label32.TabIndex = 108
+        Me.Label32.Text = "SSH Credentials:"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.BackColor = System.Drawing.Color.Transparent
+        Me.Label33.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.Location = New System.Drawing.Point(14, 134)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(95, 15)
+        Me.Label33.TabIndex = 109
+        Me.Label33.Text = "Resync Return:"
+        '
+        'txtCloudCloudURL
+        '
+        Me.txtCloudCloudURL.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCloudCloudURL.Location = New System.Drawing.Point(134, 45)
+        Me.txtCloudCloudURL.Name = "txtCloudCloudURL"
+        Me.txtCloudCloudURL.Size = New System.Drawing.Size(307, 23)
+        Me.txtCloudCloudURL.TabIndex = 110
+        '
+        'txtCloudAutoActivation
+        '
+        Me.txtCloudAutoActivation.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCloudAutoActivation.Location = New System.Drawing.Point(134, 74)
+        Me.txtCloudAutoActivation.Name = "txtCloudAutoActivation"
+        Me.txtCloudAutoActivation.Size = New System.Drawing.Size(307, 23)
+        Me.txtCloudAutoActivation.TabIndex = 111
+        '
+        'txtCloudSSHCreds
+        '
+        Me.txtCloudSSHCreds.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCloudSSHCreds.Location = New System.Drawing.Point(134, 102)
+        Me.txtCloudSSHCreds.Name = "txtCloudSSHCreds"
+        Me.txtCloudSSHCreds.Size = New System.Drawing.Size(307, 23)
+        Me.txtCloudSSHCreds.TabIndex = 112
+        '
+        'txtCloudResyncReturn
+        '
+        Me.txtCloudResyncReturn.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCloudResyncReturn.Location = New System.Drawing.Point(134, 131)
+        Me.txtCloudResyncReturn.Name = "txtCloudResyncReturn"
+        Me.txtCloudResyncReturn.Size = New System.Drawing.Size(307, 23)
+        Me.txtCloudResyncReturn.TabIndex = 113
+        '
+        'btnCloudSave
+        '
+        Me.btnCloudSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnCloudSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnCloudSave.FlatAppearance.BorderSize = 0
+        Me.btnCloudSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCloudSave.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCloudSave.ForeColor = System.Drawing.Color.White
+        Me.btnCloudSave.Location = New System.Drawing.Point(126, 245)
+        Me.btnCloudSave.Name = "btnCloudSave"
+        Me.btnCloudSave.Size = New System.Drawing.Size(110, 32)
+        Me.btnCloudSave.TabIndex = 109
+        Me.btnCloudSave.Text = "Save"
+        Me.btnCloudSave.UseVisualStyleBackColor = False
+        '
+        'tgCloudEnable
+        '
+        Me.tgCloudEnable.AutoSize = True
+        Me.tgCloudEnable.BackColor = System.Drawing.Color.DodgerBlue
+        Me.tgCloudEnable.Checked = True
+        Me.tgCloudEnable.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.tgCloudEnable.DisplayStatus = False
+        Me.tgCloudEnable.Location = New System.Drawing.Point(116, 14)
+        Me.tgCloudEnable.Name = "tgCloudEnable"
+        Me.tgCloudEnable.Size = New System.Drawing.Size(50, 19)
+        Me.tgCloudEnable.TabIndex = 110
+        Me.tgCloudEnable.Text = "On"
+        Me.tgCloudEnable.UseVisualStyleBackColor = False
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.BackColor = System.Drawing.Color.Transparent
+        Me.Label34.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.Location = New System.Drawing.Point(223, 19)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(77, 15)
+        Me.Label34.TabIndex = 114
+        Me.Label34.Text = "Use Preset?"
+        '
+        'btnCloudCancel
+        '
+        Me.btnCloudCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnCloudCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnCloudCancel.FlatAppearance.BorderSize = 0
+        Me.btnCloudCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCloudCancel.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCloudCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCloudCancel.Location = New System.Drawing.Point(242, 245)
+        Me.btnCloudCancel.Name = "btnCloudCancel"
+        Me.btnCloudCancel.Size = New System.Drawing.Size(110, 32)
+        Me.btnCloudCancel.TabIndex = 111
+        Me.btnCloudCancel.Text = "Cancel"
+        Me.btnCloudCancel.UseVisualStyleBackColor = False
+        '
+        'cmbCloudPreset
+        '
+        Me.cmbCloudPreset.FormattingEnabled = True
+        Me.cmbCloudPreset.Items.AddRange(New Object() {"staging", "live"})
+        Me.cmbCloudPreset.Location = New System.Drawing.Point(306, 16)
+        Me.cmbCloudPreset.Name = "cmbCloudPreset"
+        Me.cmbCloudPreset.Size = New System.Drawing.Size(86, 23)
+        Me.cmbCloudPreset.TabIndex = 112
+        '
+        'btnCloudPresetUSE
+        '
+        Me.btnCloudPresetUSE.BackColor = System.Drawing.Color.Teal
+        Me.btnCloudPresetUSE.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnCloudPresetUSE.FlatAppearance.BorderSize = 0
+        Me.btnCloudPresetUSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCloudPresetUSE.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCloudPresetUSE.ForeColor = System.Drawing.Color.White
+        Me.btnCloudPresetUSE.Location = New System.Drawing.Point(397, 16)
+        Me.btnCloudPresetUSE.Name = "btnCloudPresetUSE"
+        Me.btnCloudPresetUSE.Size = New System.Drawing.Size(44, 24)
+        Me.btnCloudPresetUSE.TabIndex = 112
+        Me.btnCloudPresetUSE.Text = "USE"
+        Me.btnCloudPresetUSE.UseVisualStyleBackColor = False
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.lblPWCrust)
+        Me.GroupBox4.Controls.Add(Me.lblPWDsoft)
+        Me.GroupBox4.Controls.Add(Me.Label37)
+        Me.GroupBox4.Controls.Add(Me.Label36)
+        Me.GroupBox4.Location = New System.Drawing.Point(22, 256)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(200, 86)
+        Me.GroupBox4.TabIndex = 127
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Passwords"
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.BackColor = System.Drawing.Color.Transparent
+        Me.Label36.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.Location = New System.Drawing.Point(21, 26)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(51, 15)
+        Me.Label36.TabIndex = 120
+        Me.Label36.Text = "DSOFT:"
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.BackColor = System.Drawing.Color.Transparent
+        Me.Label37.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.Location = New System.Drawing.Point(21, 52)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(53, 15)
+        Me.Label37.TabIndex = 121
+        Me.Label37.Text = "CRUST:"
+        '
+        'lblPWDsoft
+        '
+        Me.lblPWDsoft.AutoSize = True
+        Me.lblPWDsoft.BackColor = System.Drawing.Color.Transparent
+        Me.lblPWDsoft.Font = New System.Drawing.Font("Roboto Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPWDsoft.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.lblPWDsoft.Location = New System.Drawing.Point(78, 26)
+        Me.lblPWDsoft.Name = "lblPWDsoft"
+        Me.lblPWDsoft.Size = New System.Drawing.Size(28, 15)
+        Me.lblPWDsoft.TabIndex = 126
+        Me.lblPWDsoft.Text = "101"
+        '
+        'lblPWCrust
+        '
+        Me.lblPWCrust.AutoSize = True
+        Me.lblPWCrust.BackColor = System.Drawing.Color.Transparent
+        Me.lblPWCrust.Font = New System.Drawing.Font("Roboto Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPWCrust.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.lblPWCrust.Location = New System.Drawing.Point(79, 52)
+        Me.lblPWCrust.Name = "lblPWCrust"
+        Me.lblPWCrust.Size = New System.Drawing.Size(28, 15)
+        Me.lblPWCrust.TabIndex = 127
+        Me.lblPWCrust.Text = "101"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1327,6 +1663,15 @@ Partial Class frmMain
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.tbSettings.ResumeLayout(False)
+        Me.tbSetGlobal.ResumeLayout(False)
+        Me.tbSetGlobal.PerformLayout()
+        Me.tbSetCloud.ResumeLayout(False)
+        Me.tbSetCloud.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1426,4 +1771,30 @@ Partial Class frmMain
     Friend WithEvents pbCopy As PictureBox
     Friend WithEvents lblSettingSetting As Label
     Friend WithEvents cbSettingMatchOpt As CheckBox
+    Friend WithEvents tbSettings As TabControl
+    Friend WithEvents tbSetGlobal As TabPage
+    Friend WithEvents tbSetCloud As TabPage
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents txtCloudResyncReturn As TextBox
+    Friend WithEvents txtCloudSSHCreds As TextBox
+    Friend WithEvents txtCloudAutoActivation As TextBox
+    Friend WithEvents txtCloudCloudURL As TextBox
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Label32 As Label
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Label31 As Label
+    Friend WithEvents txtCloudClientID As TextBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents btnCloudSave As Button
+    Friend WithEvents tgCloudEnable As MetroFramework.Controls.MetroToggle
+    Friend WithEvents btnCloudCancel As Button
+    Friend WithEvents Label34 As Label
+    Friend WithEvents btnCloudPresetUSE As Button
+    Friend WithEvents cmbCloudPreset As ComboBox
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents Label37 As Label
+    Friend WithEvents Label36 As Label
+    Friend WithEvents lblPWCrust As Label
+    Friend WithEvents lblPWDsoft As Label
 End Class
