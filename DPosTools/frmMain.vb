@@ -51,6 +51,15 @@ Public Class frmMain
                 End If
             End If
 
+            '
+            sCloudURLPresets = ExtraFilesAppPath("CloudURLPresets.txt")
+            bReturn = CreateTextFiles(sCloudURLPresets, "Failed to initialize CloudURLPresets.txt")
+            If bReturn = False Then
+                If bReturnIfErr Then
+                    Return bReturn
+                End If
+            End If
+
             'Create Folders
             If Directory.Exists(dirMSSERVER & "\Backups") = False Then Directory.CreateDirectory(dirMSSERVER & "\Backups")
             If Directory.Exists(dirMSSERVER & "\Restore") = False Then Directory.CreateDirectory(dirMSSERVER & "\Restore")
@@ -126,6 +135,21 @@ Public Class frmMain
                 End If
             End If
 
+            'DPos Settings - Cloud
+            arCloudPresets.Clear()
+            Dim arfromlist As New List(Of Object)(File.ReadAllLines(sCloudURLPresets))
+            For Each thisPres As String In arfromlist
+                arCloudPresets.Add(thisPres)
+            Next
+
+            Me.cmbCloudPreset.Items.Clear()
+            For Each thisPreset As String In arCloudPresets
+                Me.cmbCloudPreset.Items.Add(GetField(thisPreset, ",", 1))
+            Next
+
+            PopulateCloudURLSettings(False, GetSetting("CloudURL"), GetSetting("AutoActivationURL"), GetSetting("SSHCredentialsURL"), GetSetting("ResyncReturnURL"))
+
+
             Me.dgLogs.Rows.Clear()
             Me.dgLogs.Columns("Column1").Width = 370
             Me.dgLogs.Columns("Column2").Width = 100
@@ -149,6 +173,8 @@ Public Class frmMain
                 Else
                     If sTextFile = sConfigFile Then
                         bReturn = InitializeOptionFile(sErrMsg)
+                    ElseIf sTextFile = sCloudURLPresets Then
+                        bReturn = InitializeCloudURLPresets(sErrMsg)
                     End If
                 End If
             End If
@@ -235,6 +261,35 @@ Public Class frmMain
         Return bReturn
     End Function
 
+    Private Function InitializeCloudURLPresets(ByRef sErrMsg As String) As Boolean
+        Dim bReturn As Boolean = True
+        Dim sPW As String = ""
+
+        Try
+
+            'PopulateCloudURLSettings(True, "http://cloudstaging.deliverit.com.au/sync/service/v2/", "https://api.dsoftonline.com.au/dpos-activation-staging.php", "http://staging-api.deliverit.com.au/v2/get-login-details.php", "https://api.dsoftonline.com.au/dpos-initialiset-staging.php")
+            'staging,http://cloudstaging.deliverit.com.au/sync/service/v2/,https://api.dsoftonline.com.au/dpos-activation-staging.php,http://staging-api.deliverit.com.au/v2/get-login-details.php,https://api.dsoftonline.com.au/dpos-initialiset-staging.php
+            'live,https://cloud.deliverit.com.au/sync/,https://api.dsoftonline.com.au/dpos-activation-new.php,https://api.deliverit.com.au/get-login-details.php,https://api.dsoftonline.com.au/dpos-initialise.php
+            sErrMsg = "Error on Writing to CloudURLPresets.txt"
+            If WriteToIni("staging,http://cloudstaging.deliverit.com.au/sync/service/v2/,https://api.dsoftonline.com.au/dpos-activation-staging.php,http://staging-api.deliverit.com.au/v2/get-login-details.php,https://api.dsoftonline.com.au/dpos-initialiset-staging.php", "staging,http://cloudstaging.deliverit.com.au/sync/service/v2/,https://api.dsoftonline.com.au/dpos-activation-staging.php,http://staging-api.deliverit.com.au/v2/get-login-details.php,https://api.dsoftonline.com.au/dpos-initialiset-staging.php", sCloudURLPresets) = False Then
+                bReturn = False
+                Return bReturn
+            End If
+
+            If WriteToIni("live,https://cloud.deliverit.com.au/sync/,https://api.dsoftonline.com.au/dpos-activation-new.php,https://api.deliverit.com.au/get-login-details.php,https://api.dsoftonline.com.au/dpos-initialise.php", "live,https://cloud.deliverit.com.au/sync/,https://api.dsoftonline.com.au/dpos-activation-new.php,https://api.deliverit.com.au/get-login-details.php,https://api.dsoftonline.com.au/dpos-initialise.php", sCloudURLPresets) = False Then
+                bReturn = False
+                Return bReturn
+            End If
+
+            sErrMsg = ""
+        Catch ex As Exception
+            sErrMsg = "Error on Writing to CloudURLPresets.txt: " & ex.Message.ToString
+            bReturn = False
+        End Try
+
+        Return bReturn
+    End Function
+
     Private Function LoadConfigFile(ByRef sErrMsg As String) As Boolean
         Dim bReturn As Boolean = True
 
@@ -274,6 +329,8 @@ Public Class frmMain
             Me.txtOptMYUser.Text = thisConfig.MYUser
             Me.txtOptMYPass.Text = thisConfig.MYPass
             Me.txtOptMYCSVPass.Text = thisConfig.MYCSVPass
+            Me.lblPWDsoft.Text = GetDSoftPassword()
+            Me.lblPWCrust.Text = GetChainPassword()
         Catch ex As Exception
             bReturn = False
         End Try
@@ -1544,12 +1601,26 @@ Public Class frmMain
                 sThisTabIndex = sThisTabIndex
                 bChangeTab = True
             End If
+            SwitchCustomSetTabs(bChangeTab)
         Catch ex As Exception
             bReturn = False
         End Try
 
         Return bReturn
     End Function
+
+    Public Sub SwitchCustomSetTabs(ByVal bSwitch As Boolean)
+        Me.tgCloudEnable.Enabled = bSwitch
+        Me.txtCloudClientID.Enabled = bSwitch
+        Me.txtCloudUrl.Enabled = bSwitch
+        Me.txtCloudCloudURL.Enabled = bSwitch
+        Me.txtCloudAutoActivation.Enabled = bSwitch
+        Me.txtCloudSSHCreds.Enabled = bSwitch
+        Me.txtCloudResyncReturn.Enabled = bSwitch
+        Me.btnCloudPresetUSE.Enabled = bSwitch
+        Me.btnCloudSave.Enabled = bSwitch
+        Me.btnCloudCancel.Enabled = bSwitch
+    End Sub
 
     Private Function FillMeSettingCombobox() As Boolean
         Dim bReturn As Boolean = True
@@ -1580,9 +1651,83 @@ Public Class frmMain
             ProcessSQL(sSQL, "DeliveritSQL", 10000, bthisError)
 
             GetAllSettings(sErrorMsg)
+            PopulateCloudURLSettings(False, GetSetting("CloudURL"), GetSetting("AutoActivationURL"), GetSetting("SSHCredentialsURL"), GetSetting("ResyncReturnURL"))
         End If
 
         SwitchSettingFields(False)
+    End Sub
+
+    Private Sub btnCloudPresetUSE_Click(sender As Object, e As EventArgs) Handles btnCloudPresetUSE.Click
+
+        If arCloudPresets.Count <> 0 Then
+            For Each thisPreset As String In arCloudPresets
+                If GetField(thisPreset, ",", 1) = Me.cmbCloudPreset.Text Then
+                    PopulateCloudURLSettings(True, GetField(thisPreset, ",", 2), GetField(thisPreset, ",", 3), GetField(thisPreset, ",", 4), GetField(thisPreset, ",", 5))
+                End If
+            Next
+        End If
+
+        'Select Case Me.cmbCloudPreset.Text
+        '    Case "staging"
+        '        PopulateCloudURLSettings(True, "http://cloudstaging.deliverit.com.au/sync/service/v2/", "https://api.dsoftonline.com.au/dpos-activation-staging.php", "http://staging-api.deliverit.com.au/v2/get-login-details.php", "https://api.dsoftonline.com.au/dpos-initialiset-staging.php")
+        '    Case "live"
+        '        PopulateCloudURLSettings(True, "", "", "", "")
+        'End Select
+    End Sub
+
+    Private Sub btnCloudSave_Click(sender As Object, e As EventArgs) Handles btnCloudSave.Click
+        Dim sSQL As String
+        Dim bthisError As Boolean
+        Dim sErrorMsg As String = ""
+        Dim thisCloudEnabled As String
+
+        If Me.tgCloudEnable.Checked Then
+            thisCloudEnabled = "Y"
+        Else
+            thisCloudEnabled = "N"
+        End If
+
+        Dim arrCloudSetting As New ArrayList
+        arrCloudSetting.Clear()
+        arrCloudSetting.Add("EnableCloud" & CHAR_DELIM & thisCloudEnabled)
+        arrCloudSetting.Add("ClientID" & CHAR_DELIM & Me.txtCloudClientID.Text)
+        arrCloudSetting.Add("CloudURL" & CHAR_DELIM & Me.txtCloudCloudURL.Text)
+        arrCloudSetting.Add("AutoActivationURL" & CHAR_DELIM & Me.txtCloudAutoActivation.Text)
+        arrCloudSetting.Add("SSHCredentialsURL" & CHAR_DELIM & Me.txtCloudSSHCreds.Text)
+        arrCloudSetting.Add("ResyncReturnURL" & CHAR_DELIM & Me.txtCloudResyncReturn.Text)
+
+        For Each thisCloud As String In arrCloudSetting
+            Dim sSplitCloud As String() = thisCloud.Split(CHAR_DELIM)
+
+            sSQL = "UPDATE tblSettings SET SettingValue='" & sSplitCloud(1).ToString & "' WHERE Setting='" & sSplitCloud(0).ToString & "'"
+            ProcessSQL(sSQL, "DeliveritSQL", 10000, bthisError)
+        Next
+
+        GetAllSettings(sErrorMsg)
+        PopulateCloudURLSettings(False, GetSetting("CloudURL"), GetSetting("AutoActivationURL"), GetSetting("SSHCredentialsURL"), GetSetting("ResyncReturnURL"))
+
+        MessageBox.Show("Saved!!")
+    End Sub
+
+    Private Sub btnCloudCancel_Click(sender As Object, e As EventArgs) Handles btnCloudCancel.Click
+        PopulateCloudURLSettings(False, GetSetting("CloudURL"), GetSetting("AutoActivationURL"), GetSetting("SSHCredentialsURL"), GetSetting("ResyncReturnURL"))
+    End Sub
+
+    Private Sub PopulateCloudURLSettings(ByVal bURLOnly As Boolean, ByVal sURLCloud As String, ByVal sURLAutoActivation As String, ByVal sURLSSHCredentials As String, ByVal sURLResyncReturn As String)
+        If Not bURLOnly Then
+            If GetSetting("EnableCloud") = "Y" Then
+                Me.tgCloudEnable.Checked = True
+            Else
+                Me.tgCloudEnable.Checked = False
+            End If
+
+            Me.txtCloudClientID.Text = GetSetting("ClientID")
+        End If
+
+        Me.txtCloudCloudURL.Text = sURLCloud
+        Me.txtCloudAutoActivation.Text = sURLAutoActivation
+        Me.txtCloudSSHCreds.Text = sURLSSHCredentials
+        Me.txtCloudResyncReturn.Text = sURLResyncReturn
     End Sub
 
     Private Function PopulateSettingFields(ByVal bLike As Boolean) As Boolean
@@ -1593,11 +1738,6 @@ Public Class frmMain
             ClearSettingFields()
             If Me.cmbSettingSetting.Text <> "" Then
                 sSetting = GetSettingFromDatabase(Me.cmbSettingSetting.Text, bLike)
-                'myDRString(MSDR, "Setting")
-                'myDRString(MSDR, "DefaultValue")
-                'myDRString(MSDR, "Comments")
-                'myDRString(MSDR, "Category")
-                'myDRString(MSDR, "SettingValue")
                 Me.lblSettingSetting.Text = GetField(sSetting, CHAR_DELIM, 1)
                 Me.txtSettingSettingValue.Text = GetField(sSetting, CHAR_DELIM, 5)
                 Me.txtSettingDefaultValue.Text = GetField(sSetting, CHAR_DELIM, 2)
@@ -1638,7 +1778,7 @@ Public Class frmMain
             If sPrevTabName = "Configurations" Then
                 myAppIni(sError, False)
                 Me.tbDatabase.SelectTab(0)
-            ElseIf sPrevTabName = "Restore" Then
+            ElseIf sPrevTabName = "Restore" Or sPrevTabName = "DPos Settings" Then
                 myAppIni(sError, False)
             End If
 
@@ -1662,4 +1802,6 @@ Public Class frmMain
         Me.DotNetBarTabcontrol1.SelectTab(sThisTabIndex)
         Me.btnLogsBack.Visible = False
     End Sub
+
+
 End Class
