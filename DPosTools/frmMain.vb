@@ -1650,6 +1650,14 @@ Public Class frmMain
             sSQL = "UPDATE tblSettings SET SettingValue='" & Me.txtSettingSettingValue.Text & "' WHERE Setting='" & Me.lblSettingSetting.Text & "'"
             ProcessSQL(sSQL, "DeliveritSQL", 10000, bthisError)
 
+            If Me.lblSettingSetting.Text = "EnableCloud" Then
+                If Me.txtSettingSettingValue.Text.ToUpper = "Y" Then
+                    Triggers(True)
+                Else
+                    Triggers(False)
+                End If
+            End If
+
             GetAllSettings(sErrorMsg)
             PopulateCloudURLSettings(False, GetSetting("CloudURL"), GetSetting("AutoActivationURL"), GetSetting("SSHCredentialsURL"), GetSetting("ResyncReturnURL"))
         End If
@@ -1701,6 +1709,14 @@ Public Class frmMain
 
             sSQL = "UPDATE tblSettings SET SettingValue='" & sSplitCloud(1).ToString & "' WHERE Setting='" & sSplitCloud(0).ToString & "'"
             ProcessSQL(sSQL, "DeliveritSQL", 10000, bthisError)
+
+            If sSplitCloud(0).ToString = "EnableCloud" Then
+                If sSplitCloud(1).ToString.ToUpper = "Y" Then
+                    Triggers(True)
+                Else
+                    Triggers(False)
+                End If
+            End If
         Next
 
         GetAllSettings(sErrorMsg)
