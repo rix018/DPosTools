@@ -1046,29 +1046,35 @@ Partial Class frmMain
         '
         'txtSettingDefaultValue
         '
+        Me.txtSettingDefaultValue.BackColor = System.Drawing.Color.White
         Me.txtSettingDefaultValue.Enabled = False
         Me.txtSettingDefaultValue.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSettingDefaultValue.Location = New System.Drawing.Point(129, 95)
         Me.txtSettingDefaultValue.Name = "txtSettingDefaultValue"
+        Me.txtSettingDefaultValue.ReadOnly = True
         Me.txtSettingDefaultValue.Size = New System.Drawing.Size(299, 23)
         Me.txtSettingDefaultValue.TabIndex = 99
         '
         'txtSettingComment
         '
+        Me.txtSettingComment.BackColor = System.Drawing.Color.White
         Me.txtSettingComment.Enabled = False
         Me.txtSettingComment.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSettingComment.Location = New System.Drawing.Point(129, 159)
         Me.txtSettingComment.Multiline = True
         Me.txtSettingComment.Name = "txtSettingComment"
+        Me.txtSettingComment.ReadOnly = True
         Me.txtSettingComment.Size = New System.Drawing.Size(299, 77)
         Me.txtSettingComment.TabIndex = 101
         '
         'txtSettingCategory
         '
+        Me.txtSettingCategory.BackColor = System.Drawing.Color.White
         Me.txtSettingCategory.Enabled = False
         Me.txtSettingCategory.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSettingCategory.Location = New System.Drawing.Point(129, 127)
         Me.txtSettingCategory.Name = "txtSettingCategory"
+        Me.txtSettingCategory.ReadOnly = True
         Me.txtSettingCategory.Size = New System.Drawing.Size(299, 23)
         Me.txtSettingCategory.TabIndex = 100
         '

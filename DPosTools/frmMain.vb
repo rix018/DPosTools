@@ -1589,6 +1589,9 @@ Public Class frmMain
                 Me.cmbSettingSetting.Focus()
             End If
             Me.txtSettingSettingValue.Enabled = bSwitch
+            Me.txtSettingDefaultValue.Enabled = bSwitch
+            Me.txtSettingComment.Enabled = bSwitch
+            Me.txtSettingCategory.Enabled = bSwitch
             Me.pbCopy.Visible = bSwitch
             Me.btnSettingsSave.Enabled = bSwitch
             Me.btnSettingsCancel.Enabled = bSwitch
