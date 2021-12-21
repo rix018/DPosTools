@@ -116,6 +116,17 @@ Partial Class frmMain
         Me.txtCloudClientID = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.tbHash = New System.Windows.Forms.TabPage()
+        Me.txtHashMac = New System.Windows.Forms.TextBox()
+        Me.txtHashID = New System.Windows.Forms.TextBox()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.dgIPs = New System.Windows.Forms.DataGridView()
+        Me.Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MacAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NIC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OpStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label35 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.tbpConfigurations = New System.Windows.Forms.TabPage()
         Me.btnConfigTestMS = New System.Windows.Forms.Button()
@@ -159,6 +170,8 @@ Partial Class frmMain
         CType(Me.pbCopy, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbSetCloud.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.tbHash.SuspendLayout()
+        CType(Me.dgIPs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpConfigurations.SuspendLayout()
         Me.tbDatabase.SuspendLayout()
         Me.tbcDB.SuspendLayout()
@@ -229,6 +242,7 @@ Partial Class frmMain
         Me.GroupBox4.TabIndex = 127
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Passwords"
+        Me.GroupBox4.Visible = False
         '
         'lblPWCrust
         '
@@ -855,6 +869,7 @@ Partial Class frmMain
         '
         Me.tbSettings.Controls.Add(Me.tbSetGlobal)
         Me.tbSettings.Controls.Add(Me.tbSetCloud)
+        Me.tbSettings.Controls.Add(Me.tbHash)
         Me.tbSettings.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
         Me.tbSettings.Location = New System.Drawing.Point(6, 47)
         Me.tbSettings.Name = "tbSettings"
@@ -1301,6 +1316,117 @@ Partial Class frmMain
         Me.Label18.TabIndex = 94
         Me.Label18.Text = "Enable Cloud:"
         '
+        'tbHash
+        '
+        Me.tbHash.Controls.Add(Me.txtHashMac)
+        Me.tbHash.Controls.Add(Me.txtHashID)
+        Me.tbHash.Controls.Add(Me.Label39)
+        Me.tbHash.Controls.Add(Me.Label38)
+        Me.tbHash.Controls.Add(Me.dgIPs)
+        Me.tbHash.Controls.Add(Me.Label35)
+        Me.tbHash.Location = New System.Drawing.Point(4, 24)
+        Me.tbHash.Name = "tbHash"
+        Me.tbHash.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbHash.Size = New System.Drawing.Size(469, 284)
+        Me.tbHash.TabIndex = 2
+        Me.tbHash.Text = "Hash"
+        Me.tbHash.UseVisualStyleBackColor = True
+        '
+        'txtHashMac
+        '
+        Me.txtHashMac.Enabled = False
+        Me.txtHashMac.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHashMac.Location = New System.Drawing.Point(99, 209)
+        Me.txtHashMac.Name = "txtHashMac"
+        Me.txtHashMac.ReadOnly = True
+        Me.txtHashMac.Size = New System.Drawing.Size(139, 23)
+        Me.txtHashMac.TabIndex = 120
+        '
+        'txtHashID
+        '
+        Me.txtHashID.BackColor = System.Drawing.Color.White
+        Me.txtHashID.Enabled = False
+        Me.txtHashID.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHashID.Location = New System.Drawing.Point(99, 241)
+        Me.txtHashID.Name = "txtHashID"
+        Me.txtHashID.ReadOnly = True
+        Me.txtHashID.Size = New System.Drawing.Size(356, 23)
+        Me.txtHashID.TabIndex = 121
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.BackColor = System.Drawing.Color.Transparent
+        Me.Label39.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.Location = New System.Drawing.Point(9, 245)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(52, 15)
+        Me.Label39.TabIndex = 119
+        Me.Label39.Text = "Hash ID"
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.BackColor = System.Drawing.Color.Transparent
+        Me.Label38.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.Location = New System.Drawing.Point(9, 212)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(84, 15)
+        Me.Label38.TabIndex = 118
+        Me.Label38.Text = "Mac Address"
+        '
+        'dgIPs
+        '
+        Me.dgIPs.BackgroundColor = System.Drawing.Color.White
+        Me.dgIPs.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgIPs.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+        Me.dgIPs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgIPs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Name, Me.MacAddress, Me.NIC, Me.OpStatus})
+        Me.dgIPs.Location = New System.Drawing.Point(9, 31)
+        Me.dgIPs.MultiSelect = False
+        Me.dgIPs.Name = "dgIPs"
+        Me.dgIPs.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        Me.dgIPs.RowHeadersVisible = False
+        Me.dgIPs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgIPs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgIPs.ShowEditingIcon = False
+        Me.dgIPs.Size = New System.Drawing.Size(446, 167)
+        Me.dgIPs.TabIndex = 117
+        '
+        'Name
+        '
+        Me.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Name.HeaderText = "Name"
+        Me.Name.Name = "Name"
+        '
+        'MacAddress
+        '
+        Me.MacAddress.HeaderText = "MacAddress"
+        Me.MacAddress.Name = "MacAddress"
+        Me.MacAddress.Width = 125
+        '
+        'NIC
+        '
+        Me.NIC.HeaderText = "Network Interface Type"
+        Me.NIC.Name = "NIC"
+        '
+        'OpStatus
+        '
+        Me.OpStatus.HeaderText = "Status"
+        Me.OpStatus.Name = "OpStatus"
+        Me.OpStatus.Width = 75
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.BackColor = System.Drawing.Color.Transparent
+        Me.Label35.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label35.Location = New System.Drawing.Point(6, 13)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(58, 15)
+        Me.Label35.TabIndex = 116
+        Me.Label35.Text = "Adapters"
+        '
         'Label25
         '
         Me.Label25.AutoSize = True
@@ -1641,7 +1767,7 @@ Partial Class frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(634, 372)
+        Me.ClientSize = New System.Drawing.Size(635, 372)
         Me.Controls.Add(Me.DotNetBarTabcontrol1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -1668,6 +1794,9 @@ Partial Class frmMain
         Me.tbSetCloud.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.tbHash.ResumeLayout(False)
+        Me.tbHash.PerformLayout()
+        CType(Me.dgIPs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpConfigurations.ResumeLayout(False)
         Me.tbpConfigurations.PerformLayout()
         Me.tbDatabase.ResumeLayout(False)
@@ -1803,4 +1932,15 @@ Partial Class frmMain
     Friend WithEvents Label36 As Label
     Friend WithEvents lblPWCrust As Label
     Friend WithEvents lblPWDsoft As Label
+    Friend WithEvents tbHash As TabPage
+    Friend WithEvents Label39 As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents dgIPs As DataGridView
+    Friend WithEvents Label35 As Label
+    Friend WithEvents txtHashMac As TextBox
+    Friend WithEvents txtHashID As TextBox
+    Friend WithEvents Name As DataGridViewTextBoxColumn
+    Friend WithEvents MacAddress As DataGridViewTextBoxColumn
+    Friend WithEvents NIC As DataGridViewTextBoxColumn
+    Friend WithEvents OpStatus As DataGridViewTextBoxColumn
 End Class

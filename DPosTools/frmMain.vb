@@ -1822,5 +1822,4 @@ Public Class frmMain
         Me.btnLogsBack.Visible = False
     End Sub
 
-
 End Class
