@@ -1,6 +1,9 @@
 ﻿Imports System.Text.RegularExpressions
 Imports System.Data.SqlClient
 Imports MySql.Data.MySqlClient
+Imports System.Security.Cryptography
+Imports System.Security.Cryptography.X509Certificates
+Imports System.Text
 
 Module modGlobal
     Public bDemo As Boolean = False
@@ -568,6 +571,87 @@ Module modGlobal
         End Try
 
         Return bVal
+
+    End Function
+
+    Public Function GenerateClientID(ByVal sClientID As String, ByVal sMac As String) As String
+
+        Dim sMacAddress As String = sMac
+        Dim sMacAddressSha As String
+        Dim sClientIDMD5 As String
+        Dim sFirstThreeChar As String
+        Dim sGeneratedID As String = ""
+
+        Try
+            ' Generate a sha256 hash of the mac address.
+            sMacAddressSha = GetSHA256(sMacAddress)
+
+            ' Generate an md5 hash of the clientid.
+            sClientIDMD5 = GetMd5Hash(sClientID)
+
+            ' Extract the first three characters of the md5 hash client id for salting. 
+            sFirstThreeChar = sClientIDMD5.Substring(0, 3)
+
+            ' Combine the first three characters of the md5 hash client id to the sha256 hash of the mac address and generate a sha256 hash.
+            sGeneratedID = GetSHA256(sFirstThreeChar & sMacAddressSha)
+
+        Catch ex As Exception
+        End Try
+
+        Return sGeneratedID
+    End Function
+
+    Public Function GetSHA256(ByVal sData As String) As String
+
+        Dim sResult As String = ""
+        Dim sha = SHA256.Create
+
+        Dim bytesToHash() As Byte = System.Text.Encoding.ASCII.GetBytes(sData)
+
+        Try
+            bytesToHash = sha.ComputeHash(bytesToHash)
+
+            For Each b As Byte In bytesToHash
+                sResult += b.ToString("x2")
+            Next
+
+            ' Dispose the object to avoid memory leaks.
+            sha.Dispose()
+
+        Catch ex As Exception
+
+        End Try
+
+        Return sResult
+
+    End Function
+
+    Public Function GetMd5Hash(ByVal sData As String)
+
+        Dim sHashedString As String = ""
+        Dim md5Hash As MD5 = MD5.Create()
+        Dim data As Byte() = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(sData))     ' Convert the input string to a byte array and compute the hash. 
+
+        Try
+            ' Create a new Stringbuilder to collect the bytes and create a string. 
+            Dim sBuilder As New StringBuilder()
+
+            ' Loop through each byte of the hashed data and format each one as a hexadecimal string. 
+            Dim iCount As Integer
+            For iCount = 0 To data.Length - 1
+                sBuilder.Append(data(iCount).ToString("x2"))
+            Next iCount
+
+            sHashedString = sBuilder.ToString
+
+            ' Dispose the object to avoid memory leaks.
+            md5Hash.Dispose()
+
+        Catch ex As Exception
+
+        End Try
+
+        Return sHashedString
 
     End Function
 

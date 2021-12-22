@@ -123,6 +123,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="clsInfo.vb" />
+    <Compile Include="clsNet.vb" />
+    <Compile Include="clsNets.vb" />
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>

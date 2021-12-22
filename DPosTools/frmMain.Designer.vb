@@ -116,6 +116,18 @@ Partial Class frmMain
         Me.txtCloudClientID = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.tbHash = New System.Windows.Forms.TabPage()
+        Me.txtHashAdapterName = New System.Windows.Forms.TextBox()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.txtHashMac = New System.Windows.Forms.TextBox()
+        Me.txtHashID = New System.Windows.Forms.TextBox()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.dgIPs = New System.Windows.Forms.DataGridView()
+        Me.AdapName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MacAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NIC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OpStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.tbpConfigurations = New System.Windows.Forms.TabPage()
         Me.btnConfigTestMS = New System.Windows.Forms.Button()
@@ -159,6 +171,8 @@ Partial Class frmMain
         CType(Me.pbCopy, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbSetCloud.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.tbHash.SuspendLayout()
+        CType(Me.dgIPs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpConfigurations.SuspendLayout()
         Me.tbDatabase.SuspendLayout()
         Me.tbcDB.SuspendLayout()
@@ -178,6 +192,8 @@ Partial Class frmMain
         'DotNetBarTabcontrol1
         '
         Me.DotNetBarTabcontrol1.Alignment = System.Windows.Forms.TabAlignment.Left
+        Me.DotNetBarTabcontrol1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DotNetBarTabcontrol1.Controls.Add(Me.tblMain)
         Me.DotNetBarTabcontrol1.Controls.Add(Me.tbpBackup)
         Me.DotNetBarTabcontrol1.Controls.Add(Me.tbpRestore)
@@ -189,7 +205,7 @@ Partial Class frmMain
         Me.DotNetBarTabcontrol1.Multiline = True
         Me.DotNetBarTabcontrol1.Name = "DotNetBarTabcontrol1"
         Me.DotNetBarTabcontrol1.SelectedIndex = 0
-        Me.DotNetBarTabcontrol1.Size = New System.Drawing.Size(633, 373)
+        Me.DotNetBarTabcontrol1.Size = New System.Drawing.Size(665, 373)
         Me.DotNetBarTabcontrol1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.DotNetBarTabcontrol1.TabIndex = 0
         '
@@ -213,7 +229,7 @@ Partial Class frmMain
         Me.tblMain.Location = New System.Drawing.Point(140, 4)
         Me.tblMain.Name = "tblMain"
         Me.tblMain.Padding = New System.Windows.Forms.Padding(3)
-        Me.tblMain.Size = New System.Drawing.Size(489, 365)
+        Me.tblMain.Size = New System.Drawing.Size(521, 365)
         Me.tblMain.TabIndex = 0
         Me.tblMain.Text = "Main"
         '
@@ -229,6 +245,7 @@ Partial Class frmMain
         Me.GroupBox4.TabIndex = 127
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Passwords"
+        Me.GroupBox4.Visible = False
         '
         'lblPWCrust
         '
@@ -442,7 +459,7 @@ Partial Class frmMain
         Me.tbpBackup.Location = New System.Drawing.Point(140, 4)
         Me.tbpBackup.Name = "tbpBackup"
         Me.tbpBackup.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpBackup.Size = New System.Drawing.Size(489, 365)
+        Me.tbpBackup.Size = New System.Drawing.Size(521, 365)
         Me.tbpBackup.TabIndex = 1
         Me.tbpBackup.Text = "Backup"
         '
@@ -609,7 +626,7 @@ Partial Class frmMain
         Me.tbpRestore.Location = New System.Drawing.Point(140, 4)
         Me.tbpRestore.Name = "tbpRestore"
         Me.tbpRestore.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpRestore.Size = New System.Drawing.Size(489, 365)
+        Me.tbpRestore.Size = New System.Drawing.Size(521, 365)
         Me.tbpRestore.TabIndex = 2
         Me.tbpRestore.Text = "Restore"
         '
@@ -768,21 +785,22 @@ Partial Class frmMain
         Me.tbpLogs.Location = New System.Drawing.Point(140, 4)
         Me.tbpLogs.Name = "tbpLogs"
         Me.tbpLogs.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLogs.Size = New System.Drawing.Size(489, 365)
+        Me.tbpLogs.Size = New System.Drawing.Size(521, 365)
         Me.tbpLogs.TabIndex = 3
         Me.tbpLogs.Text = "Logs"
         '
         'btnLogsBack
         '
+        Me.btnLogsBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnLogsBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
         Me.btnLogsBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
         Me.btnLogsBack.FlatAppearance.BorderSize = 0
         Me.btnLogsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLogsBack.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogsBack.ForeColor = System.Drawing.Color.White
-        Me.btnLogsBack.Location = New System.Drawing.Point(373, 324)
+        Me.btnLogsBack.Location = New System.Drawing.Point(405, 324)
         Me.btnLogsBack.Name = "btnLogsBack"
-        Me.btnLogsBack.Size = New System.Drawing.Size(110, 32)
+        Me.btnLogsBack.Size = New System.Drawing.Size(111, 32)
         Me.btnLogsBack.TabIndex = 87
         Me.btnLogsBack.Text = "Back"
         Me.btnLogsBack.UseVisualStyleBackColor = False
@@ -794,6 +812,8 @@ Partial Class frmMain
         Me.dgLogs.AllowUserToDeleteRows = False
         Me.dgLogs.AllowUserToResizeColumns = False
         Me.dgLogs.AllowUserToResizeRows = False
+        Me.dgLogs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgLogs.BackgroundColor = System.Drawing.Color.White
         Me.dgLogs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgLogs.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
@@ -824,7 +844,7 @@ Partial Class frmMain
         Me.dgLogs.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
         Me.dgLogs.RowTemplate.Height = 14
         Me.dgLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.dgLogs.Size = New System.Drawing.Size(480, 310)
+        Me.dgLogs.Size = New System.Drawing.Size(513, 310)
         Me.dgLogs.TabIndex = 12
         '
         'Column1
@@ -847,19 +867,22 @@ Partial Class frmMain
         Me.tbpDPosSettings.Location = New System.Drawing.Point(140, 4)
         Me.tbpDPosSettings.Name = "tbpDPosSettings"
         Me.tbpDPosSettings.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpDPosSettings.Size = New System.Drawing.Size(489, 365)
+        Me.tbpDPosSettings.Size = New System.Drawing.Size(521, 365)
         Me.tbpDPosSettings.TabIndex = 4
         Me.tbpDPosSettings.Text = "DPos Settings"
         '
         'tbSettings
         '
+        Me.tbSettings.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbSettings.Controls.Add(Me.tbSetGlobal)
         Me.tbSettings.Controls.Add(Me.tbSetCloud)
+        Me.tbSettings.Controls.Add(Me.tbHash)
         Me.tbSettings.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
         Me.tbSettings.Location = New System.Drawing.Point(6, 47)
         Me.tbSettings.Name = "tbSettings"
         Me.tbSettings.SelectedIndex = 0
-        Me.tbSettings.Size = New System.Drawing.Size(477, 312)
+        Me.tbSettings.Size = New System.Drawing.Size(512, 312)
         Me.tbSettings.TabIndex = 109
         '
         'tbSetGlobal
@@ -883,7 +906,7 @@ Partial Class frmMain
         Me.tbSetGlobal.Location = New System.Drawing.Point(4, 24)
         Me.tbSetGlobal.Name = "tbSetGlobal"
         Me.tbSetGlobal.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSetGlobal.Size = New System.Drawing.Size(469, 284)
+        Me.tbSetGlobal.Size = New System.Drawing.Size(504, 284)
         Me.tbSetGlobal.TabIndex = 0
         Me.tbSetGlobal.Text = "Global"
         Me.tbSetGlobal.UseVisualStyleBackColor = True
@@ -1090,7 +1113,7 @@ Partial Class frmMain
         Me.tbSetCloud.Location = New System.Drawing.Point(4, 24)
         Me.tbSetCloud.Name = "tbSetCloud"
         Me.tbSetCloud.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSetCloud.Size = New System.Drawing.Size(469, 284)
+        Me.tbSetCloud.Size = New System.Drawing.Size(504, 284)
         Me.tbSetCloud.TabIndex = 1
         Me.tbSetCloud.Text = "Cloud Setup"
         Me.tbSetCloud.UseVisualStyleBackColor = True
@@ -1301,6 +1324,136 @@ Partial Class frmMain
         Me.Label18.TabIndex = 94
         Me.Label18.Text = "Enable Cloud:"
         '
+        'tbHash
+        '
+        Me.tbHash.Controls.Add(Me.txtHashAdapterName)
+        Me.tbHash.Controls.Add(Me.Label40)
+        Me.tbHash.Controls.Add(Me.txtHashMac)
+        Me.tbHash.Controls.Add(Me.txtHashID)
+        Me.tbHash.Controls.Add(Me.Label39)
+        Me.tbHash.Controls.Add(Me.Label38)
+        Me.tbHash.Controls.Add(Me.dgIPs)
+        Me.tbHash.Location = New System.Drawing.Point(4, 24)
+        Me.tbHash.Name = "tbHash"
+        Me.tbHash.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbHash.Size = New System.Drawing.Size(504, 284)
+        Me.tbHash.TabIndex = 2
+        Me.tbHash.Text = "Network Adapters"
+        Me.tbHash.UseVisualStyleBackColor = True
+        '
+        'txtHashAdapterName
+        '
+        Me.txtHashAdapterName.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHashAdapterName.Location = New System.Drawing.Point(99, 223)
+        Me.txtHashAdapterName.Name = "txtHashAdapterName"
+        Me.txtHashAdapterName.ReadOnly = True
+        Me.txtHashAdapterName.Size = New System.Drawing.Size(158, 23)
+        Me.txtHashAdapterName.TabIndex = 123
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.BackColor = System.Drawing.Color.Transparent
+        Me.Label40.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label40.Location = New System.Drawing.Point(9, 226)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(90, 15)
+        Me.Label40.TabIndex = 122
+        Me.Label40.Text = "Adapter Name"
+        '
+        'txtHashMac
+        '
+        Me.txtHashMac.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHashMac.Location = New System.Drawing.Point(353, 223)
+        Me.txtHashMac.Name = "txtHashMac"
+        Me.txtHashMac.ReadOnly = True
+        Me.txtHashMac.Size = New System.Drawing.Size(139, 23)
+        Me.txtHashMac.TabIndex = 120
+        '
+        'txtHashID
+        '
+        Me.txtHashID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtHashID.BackColor = System.Drawing.Color.White
+        Me.txtHashID.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHashID.Location = New System.Drawing.Point(99, 252)
+        Me.txtHashID.Name = "txtHashID"
+        Me.txtHashID.ReadOnly = True
+        Me.txtHashID.Size = New System.Drawing.Size(394, 23)
+        Me.txtHashID.TabIndex = 121
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.BackColor = System.Drawing.Color.Transparent
+        Me.Label39.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.Location = New System.Drawing.Point(9, 256)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(52, 15)
+        Me.Label39.TabIndex = 119
+        Me.Label39.Text = "Hash ID"
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.BackColor = System.Drawing.Color.Transparent
+        Me.Label38.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.Location = New System.Drawing.Point(263, 226)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(84, 15)
+        Me.Label38.TabIndex = 118
+        Me.Label38.Text = "Mac Address"
+        '
+        'dgIPs
+        '
+        Me.dgIPs.AllowUserToAddRows = False
+        Me.dgIPs.AllowUserToDeleteRows = False
+        Me.dgIPs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgIPs.BackgroundColor = System.Drawing.Color.White
+        Me.dgIPs.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgIPs.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+        Me.dgIPs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgIPs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.AdapName, Me.MacAddress, Me.NIC, Me.OpStatus})
+        Me.dgIPs.Location = New System.Drawing.Point(9, 10)
+        Me.dgIPs.MultiSelect = False
+        Me.dgIPs.Name = "dgIPs"
+        Me.dgIPs.ReadOnly = True
+        Me.dgIPs.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        Me.dgIPs.RowHeadersVisible = False
+        Me.dgIPs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgIPs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgIPs.ShowEditingIcon = False
+        Me.dgIPs.Size = New System.Drawing.Size(484, 203)
+        Me.dgIPs.TabIndex = 117
+        '
+        'AdapName
+        '
+        Me.AdapName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.AdapName.HeaderText = "Name"
+        Me.AdapName.Name = "AdapName"
+        Me.AdapName.ReadOnly = True
+        '
+        'MacAddress
+        '
+        Me.MacAddress.HeaderText = "MacAddress"
+        Me.MacAddress.Name = "MacAddress"
+        Me.MacAddress.ReadOnly = True
+        Me.MacAddress.Width = 125
+        '
+        'NIC
+        '
+        Me.NIC.HeaderText = "Network Interface Type"
+        Me.NIC.Name = "NIC"
+        Me.NIC.ReadOnly = True
+        '
+        'OpStatus
+        '
+        Me.OpStatus.HeaderText = "Status"
+        Me.OpStatus.Name = "OpStatus"
+        Me.OpStatus.ReadOnly = True
+        Me.OpStatus.Width = 75
+        '
         'Label25
         '
         Me.Label25.AutoSize = True
@@ -1321,7 +1474,7 @@ Partial Class frmMain
         Me.tbpConfigurations.Location = New System.Drawing.Point(140, 4)
         Me.tbpConfigurations.Name = "tbpConfigurations"
         Me.tbpConfigurations.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpConfigurations.Size = New System.Drawing.Size(489, 365)
+        Me.tbpConfigurations.Size = New System.Drawing.Size(521, 365)
         Me.tbpConfigurations.TabIndex = 5
         Me.tbpConfigurations.Text = "Configurations"
         '
@@ -1641,7 +1794,7 @@ Partial Class frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(634, 372)
+        Me.ClientSize = New System.Drawing.Size(668, 372)
         Me.Controls.Add(Me.DotNetBarTabcontrol1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -1668,6 +1821,9 @@ Partial Class frmMain
         Me.tbSetCloud.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.tbHash.ResumeLayout(False)
+        Me.tbHash.PerformLayout()
+        CType(Me.dgIPs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpConfigurations.ResumeLayout(False)
         Me.tbpConfigurations.PerformLayout()
         Me.tbDatabase.ResumeLayout(False)
@@ -1803,4 +1959,16 @@ Partial Class frmMain
     Friend WithEvents Label36 As Label
     Friend WithEvents lblPWCrust As Label
     Friend WithEvents lblPWDsoft As Label
+    Friend WithEvents tbHash As TabPage
+    Friend WithEvents Label39 As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents dgIPs As DataGridView
+    Friend WithEvents txtHashMac As TextBox
+    Friend WithEvents txtHashID As TextBox
+    Friend WithEvents AdapName As DataGridViewTextBoxColumn
+    Friend WithEvents MacAddress As DataGridViewTextBoxColumn
+    Friend WithEvents NIC As DataGridViewTextBoxColumn
+    Friend WithEvents OpStatus As DataGridViewTextBoxColumn
+    Friend WithEvents txtHashAdapterName As TextBox
+    Friend WithEvents Label40 As Label
 End Class
