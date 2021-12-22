@@ -17,7 +17,6 @@ Public Class frmMain
             End Try
         End If
 
-
         Dim sError As String = ""
         If myAppIni(sError, True) = False Then
             MessageBox.Show(Me, sError, "Failed to Initialize App Tool")
@@ -87,7 +86,7 @@ Public Class frmMain
             End If
 
             Try
-                Me.Text = "DPos Tools - " & myBooltoDBType(thisConfig.DatabaseType) & " - Server Name: " & thisConfig.ServerName
+                Me.Text = "DPos Tools v" & Application.ProductVersion & " - " & myBooltoDBType(thisConfig.DatabaseType) & " - Server Name: " & thisConfig.ServerName
             Catch ex As Exception
                 If bReturnIfErr Then
                     sErrorMsg = "Title Bar: " & ex.Message.ToString
