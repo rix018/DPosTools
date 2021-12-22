@@ -3,6 +3,7 @@ Imports System.Data.SqlClient
 Imports MySql.Data.MySqlClient
 Imports Microsoft.Win32
 Imports System.IO
+Imports System.Net.NetworkInformation
 
 Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -149,6 +150,15 @@ Public Class frmMain
 
             PopulateCloudURLSettings(False, GetSetting("CloudURL"), GetSetting("AutoActivationURL"), GetSetting("SSHCredentialsURL"), GetSetting("ResyncReturnURL"))
 
+            'Network Adapters
+            Dim NetAdapters As New clsNets
+            NetAdapters.Clear()
+            GetAllNetworks(NetAdapters)
+            Me.dgIPs.Rows.Clear()
+
+            For Each thisNet As clsNet In NetAdapters
+                dgIPs.Rows.Add(thisNet.AdapterName, thisNet.MacAdd, thisNet.InterfaceType, thisNet.Status)
+            Next
 
             Me.dgLogs.Rows.Clear()
             Me.dgLogs.Columns("Column1").Width = 370
@@ -1822,4 +1832,33 @@ Public Class frmMain
         Me.btnLogsBack.Visible = False
     End Sub
 
+    Private Function GetAllNetworks(ByRef thisNets As clsNets) As Boolean
+        Dim bSuccess As Boolean = False
+
+        Try
+            Dim theseADP As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
+
+            For Each thisADP As NetworkInterface In theseADP
+                Dim thisNewNet As New clsNet
+                thisNewNet.AdapterName = thisADP.Name
+                thisNewNet.MacAdd = myCStr(thisADP.GetPhysicalAddress().ToString)
+                thisNewNet.InterfaceType = myCStr(thisADP.NetworkInterfaceType.ToString)
+                thisNewNet.Status = myCStr(thisADP.OperationalStatus.ToString)
+
+                thisNets.Add(thisNewNet)
+            Next
+        Catch ex As Exception
+
+        End Try
+
+        Return bSuccess
+    End Function
+
+    Private Sub dgIPs_Click(sender As Object, e As EventArgs) Handles dgIPs.Click
+        If dgIPs.SelectedRows.Count <> 0 Then
+            txtHashAdapterName.Text = dgIPs.SelectedRows(0).Cells("AdapName").Value
+            txtHashMac.Text = dgIPs.SelectedRows(0).Cells("MacAddress").Value
+            txtHashID.Text = GenerateClientID(GetSetting("ClientID"), dgIPs.SelectedRows(0).Cells("MacAddress").Value)
+        End If
+    End Sub
 End Class
